@@ -7,7 +7,7 @@ const template = `<div class="panel panel-info">
                     <span ng-bind="$ctrl.user.fullName"></span>
                     <div class="pull-right">
                         <a ng-click="$ctrl.onEditStart({index: $ctrl.index})"><i class="fa fa-pencil fa-fw"></i>Редактировать</a>
-                        <a ng-click="true"><i class="fa fa-close fa-fw"></i>Удалить</a>
+                        <a ng-click="$ctrl.onDelete({index: $ctrl.index})"><i class="fa fa-close fa-fw"></i>Удалить</a>
                     </div>
                   </h3>
                 </div>
@@ -44,6 +44,7 @@ class UserCardConroller {
     user: IUser;
     index: number;
     onEditStart: Function;
+    onDelete: Function;
 
     static $inject = [];
 
@@ -58,6 +59,7 @@ export const UserCardModule = angular.module('userCardModule', [])
         bindings: {
             user: '<',
             index: '<',
-            onEditStart: '&'
+            onEditStart: '&',
+            onDelete: '&'
         }
     });

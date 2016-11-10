@@ -19,8 +19,12 @@ export class UsersController {
         this.loadUsers();
     }
 
-    onDelete() {
-        this.loadUsers();
+    onDelete(index) {
+        this.editIndex = -1;
+        this.apiService.deleteUser(this.users[index]._id)
+            .then(()=>{
+                this.loadUsers();
+            });
     }
 
     onEditStart(index: number) {
@@ -75,7 +79,8 @@ export const UsersModule = angular.module('userCardApp', [
                             <user-card ng-if="$index !== $ctrl.editIndex"
                                        user="user"
                                        index="$index"
-                                       on-edit-start="$ctrl.onEditStart(index)"></user-card>
+                                       on-edit-start="$ctrl.onEditStart(index)"
+                                       on-delete="$ctrl.onDelete(index)"></user-card>
                             <user-edit ng-if="$index === $ctrl.editIndex"
                                        user="user"
                                        on-edit-cancel="$ctrl.onEditCancel()"
